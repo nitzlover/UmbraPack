@@ -1,4 +1,4 @@
-module obfuscator
+module github.com/nitzlover/UmbraPack
 
 go 1.25.5
 

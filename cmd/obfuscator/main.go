@@ -1,6 +1,6 @@
 package main
 
-import "obfuscator/internal/gui"
+import "github.com/nitzlover/UmbraPack/internal/gui"
 
 func main() {
 	gui.RunExeCryptor()

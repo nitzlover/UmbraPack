@@ -16,7 +16,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"obfuscator/internal/execryptor"
+	"github.com/nitzlover/UmbraPack/internal/execryptor"
 )
 
 func RunExeCryptor() {
