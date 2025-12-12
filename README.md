@@ -20,7 +20,7 @@ Windows desktop utility (Fyne UI) that encrypts executables with AES-256 and emi
 
 ## Build
 ```bash
-go build -o obfuscator.exe ./cmd/obfuscator
+go build -o umbrapack.exe ./cmd/obfuscator
 ```
 
 ## Configuration Details
