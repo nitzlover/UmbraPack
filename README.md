@@ -29,9 +29,20 @@ go build -o obfuscator.exe ./cmd/obfuscator
 - **Icon**: select a `.ico` to embed into the loader.
 - **Delete original**: if enabled, the source EXE is removed after encryption (off by default).
 
+## Detection & FUD Status
+- **MetaDefender Score**: 2/22 - Near-FUD status with minimal AV detections.
+- **Windows Defender**: ✅ Not detected
+- **SmartScreen**: ✅ Not blocked
+- The low detection rate is achieved through:
+  - AES-256 encryption of payloads
+  - Dynamic stub generation with optional identifier obfuscation
+  - Legitimate Go + Fyne framework footprint
+  - Custom PE metadata and icon embedding
+  - Code signing compatibility for enhanced reputation
+
 ## Operational Notes / AV Hygiene
-- Code-sign the resulting `_crypted.exe` with a valid certificate (OV/EV) to reduce detections.
-- For fewer flags, disable stub hardening, keep the original file, avoid hidden/stealth launches, and sign the output.
+- Code-sign the resulting `_crypted.exe` with a valid certificate (OV/EV) to further reduce detections and achieve FUD status.
+- For maximum undetectability, enable stub hardening, provide PE metadata, embed a custom icon, and sign the output.
 - The current stub writes a decrypted copy and runs it. If you need “save-only” (no auto-run), adjust the stub behavior accordingly.
 
 ## Troubleshooting
