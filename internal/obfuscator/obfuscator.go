@@ -1,8 +1,9 @@
 package obfuscator
 
 import (
-	"obfuscator/internal/crypto"
 	"strings"
+
+	"github.com/nitzlover/UmbraPack/internal/crypto"
 )
 
 type Obfuscator struct {
@@ -17,47 +18,53 @@ func New(password string) *Obfuscator {
 
 func (o *Obfuscator) ObfuscateStrings(code string) (string, error) {
 	lines := strings.Split(code, "\n")
-	var result []string
+	var result strings.Builder
 
-	for _, line := range lines {
+	for i, line := range lines {
+		if i > 0 {
+			result.WriteString("\n")
+		}
 		if strings.Contains(line, `"`) {
 			parts := strings.Split(line, `"`)
-			for i := 1; i < len(parts); i += 2 {
-				if parts[i] != "" {
-					encrypted, err := o.cryptor.Encrypt(parts[i])
+			for j := 1; j < len(parts); j += 2 {
+				if parts[j] != "" {
+					encrypted, err := o.cryptor.Encrypt(parts[j])
 					if err != nil {
 						return "", err
 					}
-					parts[i] = encrypted
+					parts[j] = encrypted
 				}
 			}
 			line = strings.Join(parts, `"`)
 		}
-		result = append(result, line)
+		result.WriteString(line)
 	}
 
-	return strings.Join(result, "\n"), nil
+	return result.String(), nil
 }
 
 func (o *Obfuscator) DeobfuscateStrings(code string) (string, error) {
 	lines := strings.Split(code, "\n")
-	var result []string
+	var result strings.Builder
 
-	for _, line := range lines {
+	for i, line := range lines {
+		if i > 0 {
+			result.WriteString("\n")
+		}
 		if strings.Contains(line, `"`) {
 			parts := strings.Split(line, `"`)
-			for i := 1; i < len(parts); i += 2 {
-				if parts[i] != "" {
-					decrypted, err := o.cryptor.Decrypt(parts[i])
+			for j := 1; j < len(parts); j += 2 {
+				if parts[j] != "" {
+					decrypted, err := o.cryptor.Decrypt(parts[j])
 					if err == nil {
-						parts[i] = decrypted
+						parts[j] = decrypted
 					}
 				}
 			}
 			line = strings.Join(parts, `"`)
 		}
-		result = append(result, line)
+		result.WriteString(line)
 	}
 
-	return strings.Join(result, "\n"), nil
+	return result.String(), nil
 }
