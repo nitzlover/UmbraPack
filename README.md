@@ -33,12 +33,6 @@ go build -o umbrapack.exe ./cmd/obfuscator
 - **MetaDefender Score**: 2/22 - Near-FUD status with minimal AV detections.
 - **Windows Defender**: ✅ Not detected
 - **SmartScreen**: ✅ Not blocked
-- The low detection rate is achieved through:
-  - AES-256 encryption of payloads
-  - Dynamic stub generation with optional identifier obfuscation
-  - Legitimate Go + Fyne framework footprint
-  - Custom PE metadata and icon embedding
-  - Code signing compatibility for enhanced reputation
 
 ## Operational Notes / AV Hygiene
 - Code-sign the resulting `_crypted.exe` with a valid certificate (OV/EV) to further reduce detections and achieve FUD status.
